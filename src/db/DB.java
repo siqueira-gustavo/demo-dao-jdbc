@@ -18,7 +18,6 @@ public class DB {
         Properties props = loadProperties();
         String url = props.getProperty("dburl");
         conn = DriverManager.getConnection(url, props);
-        System.out.println("Connected to '" + conn.getMetaData() + "'");
       } catch (SQLException e) {
         throw new DbException(e.getMessage());
       }
@@ -29,7 +28,6 @@ public class DB {
   public static void closeConnection() {
     if (conn != null) {
       try {
-        System.out.println("Connection closed");
         conn.close();
       } catch (SQLException e) {
         throw new DbException(e.getMessage());
@@ -41,7 +39,6 @@ public class DB {
     try (FileInputStream fs = new FileInputStream("db.properties")) {
       Properties props = new Properties();
       props.load(fs);
-      System.out.println("Properties loaded");
       return props;
     } catch (IOException e) {
       throw new DbException(e.getMessage());
@@ -52,7 +49,6 @@ public class DB {
     if (st != null) {
       try {
         st.close();
-        System.out.println("Statement closed");
       } catch (SQLException e) {
         throw new DbException(e.getMessage());
       }
@@ -63,7 +59,6 @@ public class DB {
     if (rs != null) {
       try {
         rs.close();
-        System.out.println("ResultSet closed");
       } catch (SQLException e) {
         throw new DbException(e.getMessage());
       }
